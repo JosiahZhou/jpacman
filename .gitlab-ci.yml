@@ -4,4 +4,4 @@ maven_build:
     - "Xvfb :99 &"
     - "mvn test"
     - "java -version"
-  image: adrianchan/maven-xvfb
+  image: tudsqte/ci-image
