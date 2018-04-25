@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <groupId>nl.tudelft.jpacman</groupId>
-    <artifactId>jpacman-template</artifactId>
+    <artifactId>stqe-lab-group-97</artifactId>
     <version>8.0.0</version>
 
     <name>JPacman Template Solution</name>
