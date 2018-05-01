@@ -1,6 +1,11 @@
 package nl.tudelft.jpacman.board;
 import nl.tudelft.jpacman.sprite.Sprite;
 
+/**
+ * Basic implementation of square.
+ *
+ * @author Chenru Lin
+ */
 public class BasicSquare extends Square {
     /**
      * Creates a new basic square.
