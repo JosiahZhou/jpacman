@@ -11,7 +11,7 @@ import static org.mockito.Mockito.mock;
 /**
  * Test various aspects of board.
  *
- * @author Jeroen Roosen
+ * @author Chenru Lin
  */
 class BoardTest {
 
@@ -21,11 +21,7 @@ class BoardTest {
     private final Square[][] grid = {
             { mock(Square.class) },
     };
-//    private final Square[][] gridNull = {
-//            { null },
-//    };
     private final Board board = new Board(grid);
-//    private final Board boardNull = new Board(gridNull);
 
     /**
      * Verifies the board has the correct width.
@@ -54,6 +50,5 @@ class BoardTest {
     })
     void testSquareAt(int x, int y) {
         assertThat(board.squareAt(x, y)).isEqualTo(grid[x][y]);
-        //assertThat(boardNull.squareAt(x, y)).isEqualTo(gridNull[x][y]);
     }
 }

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * A very simple (and not particularly useful)
  * test class to have a starting point where to put tests.
  *
- * @author Arie van Deursen
+ * @author Shijie Zhou
  */
 public class DirectionTest {
 
