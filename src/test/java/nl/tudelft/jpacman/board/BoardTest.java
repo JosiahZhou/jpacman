@@ -3,7 +3,6 @@ package nl.tudelft.jpacman.board;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.mockito.internal.matchers.Null;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -21,11 +20,7 @@ class BoardTest {
     private final Square[][] grid = {
             { mock(Square.class) },
     };
-//    private final Square[][] gridNull = {
-//            { null },
-//    };
     private final Board board = new Board(grid);
-//    private final Board boardNull = new Board(gridNull);
 
     /**
      * Verifies the board has the correct width.
