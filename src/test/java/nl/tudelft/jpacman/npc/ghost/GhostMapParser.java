@@ -97,9 +97,9 @@ public final class GhostMapParser extends MapParser {
 
     /**
      *
-     * @param ghosts
-     * @param ghost
-     * @return
+     * @param ghosts the list of ghosts
+     * @param ghost the ghost want to add to the list
+     * @return ghostSquare
      */
     protected Square makeGhostSquare(List<Ghost> ghosts, Ghost ghost) {
         Square ghostSquare = this.boardFactory.createGround();
