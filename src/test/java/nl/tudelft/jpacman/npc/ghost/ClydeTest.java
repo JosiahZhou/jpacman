@@ -24,7 +24,7 @@ import static org.mockito.Mockito.mock;
 /**
  * @author: Chenru Lin
  * @date 2018/5/15 21:29
- * @discription:
+ * @discription: Some tests for the movement of Clyde
  */
 public class ClydeTest {
     /**
@@ -33,17 +33,12 @@ public class ClydeTest {
     private GhostMapParser parser;
 
     private PlayerFactory playerfactory;
-    /**
-     * The String used to generate the level
-     */
-//    private List<String> map = new ArrayList<>(Arrays.asList("############", "#P        C#", "############"));
 
     private Level level;
     /**
      * Set up the map parser.
      */
 
-    private Navigation nav;
     @BeforeEach
     void setUp() {
         PacManSprites sprites = new PacManSprites();
@@ -54,28 +49,60 @@ public class ClydeTest {
 
     @Test
     void farAwayTest() {
-        level = parser.parseMap(Lists.newArrayList("############", "#P        C#", "############"));
-        Player p = playerfactory.createPacMan();
-        level.registerPlayer(p);
-        level.registerPlayer(p);
-        p.setDirection(Direction.WEST);
-        System.out.println(p.getDirection());
-//        Board b = level.getBoard();
-        Clyde c = parser.findUnit(Clyde.class, level);
-        assertThat(c.getDirection()).isEqualTo(Direction.EAST);
-    }
-
-    @Test
-    void onPointTest() {
         level = parser.parseMap(Lists.newArrayList("##############", "#P          C#", "##############"));
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
-        Board b = level.getBoard();
-        Player x = parser.findUnit(Player.class, level);
-        System.out.println(x);
         Clyde c = parser.findUnit(Clyde.class, level);
-        Optional<Direction> d = c.nextAiMove();
-        assertThat(d).isEqualTo(Optional.of(Direction.WEST));
+        assertThat(c.nextAiMove()).isEqualTo(Optional.of(Direction.WEST));
     }
+
+    @Test
+    void NearTest() {
+        level = parser.parseMap(Lists.newArrayList("############", "#P     C   #", "############"));
+        Player p = playerfactory.createPacMan();
+        level.registerPlayer(p);
+        p.setDirection(Direction.WEST);
+        Clyde c = parser.findUnit(Clyde.class, level);
+        assertThat(c.nextAiMove()).isEqualTo(Optional.of(Direction.EAST));
+    }
+
+    @Test
+    void noPathTest() {
+        level = parser.parseMap(Lists.newArrayList("############", "#P    #C   #", "############"));
+        Player p = playerfactory.createPacMan();
+        level.registerPlayer(p);
+        p.setDirection(Direction.WEST);
+        Clyde c = parser.findUnit(Clyde.class, level);
+        assertThat(c.nextAiMove()).isEqualTo(Optional.empty());
+    }
+
+    @Test
+    void noPlayerTest() {
+        level = parser.parseMap(Lists.newArrayList("#############", "#          C#", "#############"));
+        Clyde c = parser.findUnit(Clyde.class, level);
+        assertThat(c.nextAiMove()).isEqualTo(Optional.empty());
+    }
+
+    @Test
+    void onPointTest() {
+        level = parser.parseMap(Lists.newArrayList("############", "#P        C#", "############"));
+        Player p = playerfactory.createPacMan();
+        level.registerPlayer(p);
+        p.setDirection(Direction.WEST);
+        Clyde c = parser.findUnit(Clyde.class, level);
+        assertThat(c.nextAiMove()).isEqualTo(Optional.of(Direction.WEST));
+    }
+
+    @Test
+    void offPointTest() {
+        level = parser.parseMap(Lists.newArrayList("#############", "#P         C#", "#############"));
+        Player p = playerfactory.createPacMan();
+        level.registerPlayer(p);
+        p.setDirection(Direction.WEST);
+        Clyde c = parser.findUnit(Clyde.class, level);
+        assertThat(c.nextAiMove()).isEqualTo(Optional.of(Direction.WEST));
+    }
+
+
 }

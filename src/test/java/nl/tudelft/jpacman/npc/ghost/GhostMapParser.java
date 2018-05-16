@@ -60,6 +60,12 @@ public final class GhostMapParser extends MapParser {
             case 'C':
                 grid[x][y] = makeGhostSquare(ghosts, ghostFactory.createClyde());
                 break;
+            case 'I':
+                grid[x][y] = makeGhostSquare(ghosts, ghostFactory.createInky());
+                break;
+            case 'B':
+                grid[x][y] = makeGhostSquare(ghosts, ghostFactory.createBlinky());
+                break;
             default:
                 super.addSquare(grid, ghosts, startPositions, x, y, c);
         }

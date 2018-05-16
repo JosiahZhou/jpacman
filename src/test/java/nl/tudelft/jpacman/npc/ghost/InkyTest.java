@@ -1,0 +1,132 @@
+package nl.tudelft.jpacman.npc.ghost;
+
+import com.google.common.collect.Lists;
+import nl.tudelft.jpacman.board.Direction;
+import nl.tudelft.jpacman.level.Level;
+import nl.tudelft.jpacman.level.Player;
+import nl.tudelft.jpacman.level.PlayerFactory;
+import nl.tudelft.jpacman.sprite.PacManSprites;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+/**
+ * @author: Chenru Lin
+ * @date 2018/5/16 10:13
+ * @discription: Some tests for the movement of Inky
+ */
+public class InkyTest {
+
+    /**
+     * Map parser used to construct boards.
+     */
+    private GhostMapParser parser;
+
+    private PlayerFactory playerfactory;
+
+    private Level level;
+    /**
+     * Set up the map parser.
+     */
+
+    @BeforeEach
+    void setUp() {
+        PacManSprites sprites = new PacManSprites();
+        playerfactory = new PlayerFactory(sprites);
+        parser = GhostMapParser.create();
+
+    }
+
+    /**
+     * Test when Inky is behind Blinky and Blinky is behind player.
+     */
+    @Test
+    void followBlinkyTest() {
+        level = parser.parseMap(Lists.newArrayList("##############", "#P        B I#", "##############"));
+        Player p = playerfactory.createPacMan();
+        level.registerPlayer(p);
+        p.setDirection(Direction.WEST);
+        Inky i = parser.findUnit(Inky.class, level);
+        assertThat(i.nextAiMove()).isEqualTo(Optional.of(Direction.WEST));
+    }
+
+    /**
+     * Test when Inky is ahead of Blinky and Blinky is behind player.
+     */
+    @Test
+    void towardPlayerAwayFromBlinkyTest() {
+        level = parser.parseMap(Lists.newArrayList("##############", "#        P IB#", "##############"));
+        Player p = playerfactory.createPacMan();
+        level.registerPlayer(p);
+        p.setDirection(Direction.WEST);
+        Inky i = parser.findUnit(Inky.class, level);
+        assertThat(i.nextAiMove()).isEqualTo(Optional.of(Direction.WEST));
+    }
+
+    /**
+     * Test when Inky is far ahead of player and Blinky is behind player.
+     */
+    @Test
+    void towardPlayerTowardBlinkyTest() {
+        level = parser.parseMap(Lists.newArrayList("###############", "#I         P B#", "###############"));
+        Player p = playerfactory.createPacMan();
+        level.registerPlayer(p);
+        p.setDirection(Direction.WEST);
+        Inky i = parser.findUnit(Inky.class, level);
+        assertThat(i.nextAiMove()).isEqualTo(Optional.of(Direction.EAST));
+    }
+
+
+    /**
+     * Test when Inky is ahead of player and Blinky is far behind player.
+     */
+    @Test
+    void awayFromPlayerAwayFromBlinkyTest() {
+        level = parser.parseMap(Lists.newArrayList("###############", "#      I  P  B#", "###############"));
+        Player p = playerfactory.createPacMan();
+        level.registerPlayer(p);
+        p.setDirection(Direction.WEST);
+        Inky i = parser.findUnit(Inky.class, level);
+        assertThat(i.nextAiMove()).isEqualTo(Optional.of(Direction.WEST));
+    }
+
+    /**
+     * Test when no path between Blinky and Player.
+     */
+    @Test
+    void noPathTest() {
+        level = parser.parseMap(Lists.newArrayList("##############", "#P    #   B I#", "##############"));
+        Player p = playerfactory.createPacMan();
+        level.registerPlayer(p);
+        p.setDirection(Direction.WEST);
+        Inky i = parser.findUnit(Inky.class, level);
+        assertThat(i.nextAiMove()).isEqualTo(Optional.empty());
+    }
+
+    /**
+     * Test when the destination is wall
+     */
+    @Test
+    void DestinationOutOfBoundaryTest() {
+        level = parser.parseMap(Lists.newArrayList("#############", "#P        IB#", "#############"));
+        Player p = playerfactory.createPacMan();
+        level.registerPlayer(p);
+        p.setDirection(Direction.WEST);
+        Inky i = parser.findUnit(Inky.class, level);
+        assertThat(i.nextAiMove()).isEqualTo(Optional.empty());
+    }
+
+
+    /**
+     * Test when there is no player.
+     */
+    @Test
+    void noPlayerTest() {
+        level = parser.parseMap(Lists.newArrayList("#############", "#          I#", "#############"));
+        Inky i = parser.findUnit(Inky.class, level);
+        assertThat(i.nextAiMove()).isEqualTo(Optional.empty());
+    }
+}
