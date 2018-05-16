@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * A very simple (and not particularly useful)
  * test class to have a starting point where to put tests.
  *
- * @author Arie van Deursen
+ * @author Shijie Zhou
  */
 public class DirectionTest {
 
@@ -19,5 +19,32 @@ public class DirectionTest {
     void testNorth() {
         Direction north = Direction.valueOf("NORTH");
         assertThat(north.getDeltaY()).isEqualTo(-1);
+    }
+
+    /**
+     * Do we get the correct delta when moving south?
+     */
+    @Test
+    void testSouth() {
+        Direction south = Direction.valueOf("SOUTH");
+        assertThat(south.getDeltaY()).isEqualTo(1);
+    }
+
+    /**
+     * Do we get the correct delta when moving east?
+     */
+    @Test
+    void testEast() {
+        Direction east = Direction.valueOf("EAST");
+        assertThat(east.getDeltaX()).isEqualTo(1);
+    }
+
+    /**
+     * Do we get the correct delta when moving west?
+     */
+    @Test
+    void testWest() {
+        Direction west = Direction.valueOf("WEST");
+        assertThat(west.getDeltaX()).isEqualTo(-1);
     }
 }
