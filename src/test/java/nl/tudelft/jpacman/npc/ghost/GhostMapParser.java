@@ -95,7 +95,13 @@ public final class GhostMapParser extends MapParser {
         return null;
     }
 
-    private Square makeGhostSquare(List<Ghost> ghosts, Ghost ghost) {
+    /**
+     *
+     * @param ghosts
+     * @param ghost
+     * @return
+     */
+    protected Square makeGhostSquare(List<Ghost> ghosts, Ghost ghost) {
         Square ghostSquare = this.boardFactory.createGround();
         ghosts.add(ghost);
         ghost.occupy(ghostSquare);

@@ -15,7 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author: Chenru Lin
- * @date 2018/5/16 10:13
  * @discription: Some tests for the movement of Inky
  */
 public class InkyTest {
@@ -45,7 +44,9 @@ public class InkyTest {
      */
     @Test
     void followBlinkyTest() {
-        level = parser.parseMap(Lists.newArrayList("##############", "#P        B I#", "##############"));
+        level = parser.parseMap(
+                Lists.newArrayList("##############", "#P        B I#",
+                        "##############"));
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
@@ -58,7 +59,9 @@ public class InkyTest {
      */
     @Test
     void towardPlayerAwayFromBlinkyTest() {
-        level = parser.parseMap(Lists.newArrayList("##############", "#        P IB#", "##############"));
+        level = parser.parseMap(
+                Lists.newArrayList("##############", "#        P IB#",
+                        "##############"));
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
@@ -71,7 +74,9 @@ public class InkyTest {
      */
     @Test
     void towardPlayerTowardBlinkyTest() {
-        level = parser.parseMap(Lists.newArrayList("###############", "#I         P B#", "###############"));
+        level = parser.parseMap(
+                Lists.newArrayList("###############", "#I         P B#",
+                        "###############"));
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
@@ -85,7 +90,9 @@ public class InkyTest {
      */
     @Test
     void awayFromPlayerAwayFromBlinkyTest() {
-        level = parser.parseMap(Lists.newArrayList("###############", "#      I  P  B#", "###############"));
+        level = parser.parseMap(
+                Lists.newArrayList("###############", "#      I  P  B#",
+                        "###############"));
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
@@ -98,7 +105,9 @@ public class InkyTest {
      */
     @Test
     void noPathTest() {
-        level = parser.parseMap(Lists.newArrayList("##############", "#P    #   B I#", "##############"));
+        level = parser.parseMap(
+                Lists.newArrayList("##############", "#P    #   B I#",
+                        "##############"));
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
@@ -107,11 +116,13 @@ public class InkyTest {
     }
 
     /**
-     * Test when the destination is wall
+     * Test when the destination is wall.
      */
     @Test
-    void DestinationOutOfBoundaryTest() {
-        level = parser.parseMap(Lists.newArrayList("#############", "#P        IB#", "#############"));
+    void destinationOutOfBoundaryTest() {
+        level = parser.parseMap(
+                Lists.newArrayList("#############", "#P        IB#",
+                        "#############"));
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
@@ -125,7 +136,9 @@ public class InkyTest {
      */
     @Test
     void noPlayerTest() {
-        level = parser.parseMap(Lists.newArrayList("#############", "#          I#", "#############"));
+        level = parser.parseMap(
+                Lists.newArrayList("#############", "#          I#",
+                        "#############"));
         Inky i = parser.findUnit(Inky.class, level);
         assertThat(i.nextAiMove()).isEqualTo(Optional.empty());
     }

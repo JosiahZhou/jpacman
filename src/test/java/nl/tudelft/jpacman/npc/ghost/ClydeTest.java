@@ -1,29 +1,23 @@
 package nl.tudelft.jpacman.npc.ghost;
 
-import nl.tudelft.jpacman.level.*;
-import nl.tudelft.jpacman.npc.Ghost;
+import nl.tudelft.jpacman.level.Level;
+import nl.tudelft.jpacman.level.Player;
+import nl.tudelft.jpacman.level.PlayerFactory;
 
-import static org.mockito.Mockito.mock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.google.common.collect.Lists;
-import nl.tudelft.jpacman.board.Board;
-import nl.tudelft.jpacman.board.BoardFactory;
 import nl.tudelft.jpacman.board.Direction;
 import nl.tudelft.jpacman.sprite.PacManSprites;
-import nl.tudelft.jpacman.board.Unit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.*;
+import java.util.Optional;
 
-import static org.mockito.Mockito.mock;
 
 /**
  * @author: Chenru Lin
- * @date 2018/5/15 21:29
  * @discription: Some tests for the movement of Clyde
  */
 public class ClydeTest {
@@ -47,9 +41,13 @@ public class ClydeTest {
 
     }
 
+    /**
+     * Test if the Player is far away from Clyde.
+     */
     @Test
     void farAwayTest() {
-        level = parser.parseMap(Lists.newArrayList("##############", "#P          C#", "##############"));
+        level = parser.parseMap(
+                Lists.newArrayList("##############", "#P          C#", "##############"));
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
@@ -57,9 +55,13 @@ public class ClydeTest {
         assertThat(c.nextAiMove()).isEqualTo(Optional.of(Direction.WEST));
     }
 
+    /**
+     * Test if the Player is near Clyde.
+     */
     @Test
-    void NearTest() {
-        level = parser.parseMap(Lists.newArrayList("############", "#P     C   #", "############"));
+    void nearTest() {
+        level = parser.parseMap(
+                Lists.newArrayList("############", "#P     C   #", "############"));
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
@@ -67,9 +69,13 @@ public class ClydeTest {
         assertThat(c.nextAiMove()).isEqualTo(Optional.of(Direction.EAST));
     }
 
+    /**
+     * Test if Clyde has no path to go.
+     */
     @Test
     void noPathTest() {
-        level = parser.parseMap(Lists.newArrayList("############", "#P    #C   #", "############"));
+        level = parser.parseMap(
+                Lists.newArrayList("############", "#P    #C   #", "############"));
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
@@ -77,16 +83,24 @@ public class ClydeTest {
         assertThat(c.nextAiMove()).isEqualTo(Optional.empty());
     }
 
+    /**
+     * Test if there's no player.
+     */
     @Test
     void noPlayerTest() {
-        level = parser.parseMap(Lists.newArrayList("#############", "#          C#", "#############"));
+        level = parser.parseMap(
+                Lists.newArrayList("#############", "#          C#", "#############"));
         Clyde c = parser.findUnit(Clyde.class, level);
         assertThat(c.nextAiMove()).isEqualTo(Optional.empty());
     }
 
+    /**
+     * Test for the on point distance.
+     */
     @Test
     void onPointTest() {
-        level = parser.parseMap(Lists.newArrayList("############", "#P        C#", "############"));
+        level = parser.parseMap(
+                Lists.newArrayList("############", "#P        C#", "############"));
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
@@ -94,9 +108,13 @@ public class ClydeTest {
         assertThat(c.nextAiMove()).isEqualTo(Optional.of(Direction.WEST));
     }
 
+    /**
+     * Test for the off point distance.
+     */
     @Test
     void offPointTest() {
-        level = parser.parseMap(Lists.newArrayList("#############", "#P         C#", "#############"));
+        level = parser.parseMap(
+                Lists.newArrayList("#############", "#P         C#", "#############"));
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);

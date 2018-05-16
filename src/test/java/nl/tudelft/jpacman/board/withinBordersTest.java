@@ -8,10 +8,9 @@ import static org.mockito.Mockito.mock;
 
 /**
  * @author: Chenru Lin
- * @date 2018/5/16 11:18
  * @discription: Boundary test
  */
-public class withinBordersTest {
+public class WithInBordersTest {
 
 
     private static final int WIDTH = 2;
