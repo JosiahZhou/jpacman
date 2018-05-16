@@ -3,7 +3,7 @@ package nl.tudelft.jpacman.npc.ghost;
 import nl.tudelft.jpacman.level.Level;
 import nl.tudelft.jpacman.level.Player;
 import nl.tudelft.jpacman.level.PlayerFactory;
-
+import nl.tudelft.jpacman.npc.ghost.Navigation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
