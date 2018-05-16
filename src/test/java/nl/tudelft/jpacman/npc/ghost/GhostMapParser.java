@@ -25,7 +25,7 @@ public final class GhostMapParser extends MapParser {
      * @param boardFactory The factory to create board elements.
      * @param ghostFactory the factory to create the ghosts.
      */
-    private GhostMapParser(LevelFactory levelFactory, BoardFactory boardFactory,
+    public GhostMapParser(LevelFactory levelFactory, BoardFactory boardFactory,
                            GhostFactory ghostFactory) {
         super(levelFactory, boardFactory);
         this.ghostFactory = ghostFactory;
@@ -39,6 +39,12 @@ public final class GhostMapParser extends MapParser {
         switch (c) {
             case 'C':
                 grid[x][y] = makeGhostSquare(ghosts, ghostFactory.createClyde());
+                break;
+            case 'B':
+                grid[x][y] = makeGhostSquare(ghosts, ghostFactory.createBlinky());
+                break;
+            case 'I':
+                grid[x][y] = makeGhostSquare(ghosts, ghostFactory.createInky());
                 break;
             default:
                 super.addSquare(grid, ghosts, startPositions, x, y, c);

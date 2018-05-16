@@ -42,10 +42,10 @@ public class WithInBordersTest {
      */
     @ParameterizedTest
     @CsvSource({
-            "-1, 0",
+            "-1, 1",
             "0, -1",
             "2, 0",
-            "0, 2"
+            "1, 2"
     })
     void testOutOfBoard(int x, int y) {
         assertThat(board.withinBorders(x, y)).isFalse();

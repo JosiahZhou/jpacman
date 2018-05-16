@@ -1,8 +1,10 @@
 package nl.tudelft.jpacman.npc.ghost;
 
 import com.google.common.collect.Lists;
+import nl.tudelft.jpacman.board.BoardFactory;
 import nl.tudelft.jpacman.board.Direction;
 import nl.tudelft.jpacman.level.Level;
+import nl.tudelft.jpacman.level.LevelFactory;
 import nl.tudelft.jpacman.level.Player;
 import nl.tudelft.jpacman.level.PlayerFactory;
 import nl.tudelft.jpacman.sprite.PacManSprites;
@@ -22,10 +24,11 @@ public class InkyTest {
     /**
      * Map parser used to construct boards.
      */
-    private GhostMapParser parser;
-
     private PlayerFactory playerfactory;
-
+    private LevelFactory levelfactory;
+    private GhostFactory ghostFactory;
+    private BoardFactory boardfactory;
+    private GhostMapParser parser;
     private Level level;
     /**
      * Set up the map parser.
@@ -35,8 +38,10 @@ public class InkyTest {
     void setUp() {
         PacManSprites sprites = new PacManSprites();
         playerfactory = new PlayerFactory(sprites);
-        parser = GhostMapParser.create();
-
+        ghostFactory = new GhostFactory(sprites);
+        levelfactory = new LevelFactory(sprites, ghostFactory);
+        boardfactory = new BoardFactory(sprites);
+        parser = new GhostMapParser(levelfactory, boardfactory, ghostFactory);
     }
 
     /**
@@ -50,7 +55,7 @@ public class InkyTest {
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
-        Inky i = parser.findUnit(Inky.class, level);
+        Inky i = Navigation.findUnitInBoard(Inky.class, level.getBoard());
         assertThat(i.nextAiMove()).isEqualTo(Optional.of(Direction.WEST));
     }
 
@@ -65,7 +70,7 @@ public class InkyTest {
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
-        Inky i = parser.findUnit(Inky.class, level);
+        Inky i = Navigation.findUnitInBoard(Inky.class, level.getBoard());
         assertThat(i.nextAiMove()).isEqualTo(Optional.of(Direction.WEST));
     }
 
@@ -80,7 +85,7 @@ public class InkyTest {
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
-        Inky i = parser.findUnit(Inky.class, level);
+        Inky i = Navigation.findUnitInBoard(Inky.class, level.getBoard());
         assertThat(i.nextAiMove()).isEqualTo(Optional.of(Direction.EAST));
     }
 
@@ -96,7 +101,7 @@ public class InkyTest {
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
-        Inky i = parser.findUnit(Inky.class, level);
+        Inky i = Navigation.findUnitInBoard(Inky.class, level.getBoard());
         assertThat(i.nextAiMove()).isEqualTo(Optional.of(Direction.WEST));
     }
 
@@ -111,7 +116,7 @@ public class InkyTest {
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
-        Inky i = parser.findUnit(Inky.class, level);
+        Inky i = Navigation.findUnitInBoard(Inky.class, level.getBoard());
         assertThat(i.nextAiMove()).isEqualTo(Optional.empty());
     }
 
@@ -126,7 +131,7 @@ public class InkyTest {
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
-        Inky i = parser.findUnit(Inky.class, level);
+        Inky i = Navigation.findUnitInBoard(Inky.class, level.getBoard());
         assertThat(i.nextAiMove()).isEqualTo(Optional.empty());
     }
 
@@ -139,7 +144,7 @@ public class InkyTest {
         level = parser.parseMap(
                 Lists.newArrayList("#############", "#          I#",
                         "#############"));
-        Inky i = parser.findUnit(Inky.class, level);
+        Inky i = Navigation.findUnitInBoard(Inky.class, level.getBoard());
         assertThat(i.nextAiMove()).isEqualTo(Optional.empty());
     }
 }

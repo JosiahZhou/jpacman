@@ -1,8 +1,7 @@
 package nl.tudelft.jpacman.npc.ghost;
 
-import nl.tudelft.jpacman.level.Level;
-import nl.tudelft.jpacman.level.Player;
-import nl.tudelft.jpacman.level.PlayerFactory;
+import nl.tudelft.jpacman.board.BoardFactory;
+import nl.tudelft.jpacman.level.*;
 import nl.tudelft.jpacman.npc.ghost.Navigation;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,10 +23,12 @@ public class ClydeTest {
     /**
      * Map parser used to construct boards.
      */
-    private GhostMapParser parser;
 
     private PlayerFactory playerfactory;
-
+    private LevelFactory levelfactory;
+    private GhostFactory ghostFactory;
+    private BoardFactory boardfactory;
+    private GhostMapParser parser;
     private Level level;
     /**
      * Set up the map parser.
@@ -37,8 +38,11 @@ public class ClydeTest {
     void setUp() {
         PacManSprites sprites = new PacManSprites();
         playerfactory = new PlayerFactory(sprites);
-        parser = GhostMapParser.create();
-
+        ghostFactory = new GhostFactory(sprites);
+        levelfactory = new LevelFactory(sprites, ghostFactory);
+        boardfactory = new BoardFactory(sprites);
+        parser = new GhostMapParser(levelfactory, boardfactory, ghostFactory);
+//        parser.
     }
 
     /**
@@ -51,7 +55,7 @@ public class ClydeTest {
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
-        Clyde c = parser.findUnit(Clyde.class, level);
+        Clyde c = Navigation.findUnitInBoard(Clyde.class, level.getBoard());
         assertThat(c.nextAiMove()).isEqualTo(Optional.of(Direction.WEST));
     }
 
@@ -65,7 +69,7 @@ public class ClydeTest {
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
-        Clyde c = parser.findUnit(Clyde.class, level);
+        Clyde c = Navigation.findUnitInBoard(Clyde.class, level.getBoard());
         assertThat(c.nextAiMove()).isEqualTo(Optional.of(Direction.EAST));
     }
 
@@ -79,7 +83,7 @@ public class ClydeTest {
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
-        Clyde c = parser.findUnit(Clyde.class, level);
+        Clyde c = Navigation.findUnitInBoard(Clyde.class, level.getBoard());
         assertThat(c.nextAiMove()).isEqualTo(Optional.empty());
     }
 
@@ -90,7 +94,7 @@ public class ClydeTest {
     void noPlayerTest() {
         level = parser.parseMap(
                 Lists.newArrayList("#############", "#          C#", "#############"));
-        Clyde c = parser.findUnit(Clyde.class, level);
+        Clyde c = Navigation.findUnitInBoard(Clyde.class, level.getBoard());
         assertThat(c.nextAiMove()).isEqualTo(Optional.empty());
     }
 
@@ -104,7 +108,7 @@ public class ClydeTest {
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
-        Clyde c = parser.findUnit(Clyde.class, level);
+        Clyde c = Navigation.findUnitInBoard(Clyde.class, level.getBoard());
         assertThat(c.nextAiMove()).isEqualTo(Optional.of(Direction.WEST));
     }
 
@@ -118,7 +122,7 @@ public class ClydeTest {
         Player p = playerfactory.createPacMan();
         level.registerPlayer(p);
         p.setDirection(Direction.WEST);
-        Clyde c = parser.findUnit(Clyde.class, level);
+        Clyde c = Navigation.findUnitInBoard(Clyde.class, level.getBoard());
         assertThat(c.nextAiMove()).isEqualTo(Optional.of(Direction.WEST));
     }
 
