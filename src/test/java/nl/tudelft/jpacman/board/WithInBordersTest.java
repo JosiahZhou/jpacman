@@ -11,11 +11,7 @@ import static org.mockito.Mockito.mock;
  * @discription: Boundary test
  */
 public class WithInBordersTest {
-
-
-    private static final int WIDTH = 2;
-    private static final int HEIGHT = 2;
-
+    
 
     private final Square[][] grid = {
             { mock(Square.class), mock(Square.class) },
