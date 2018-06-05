@@ -29,7 +29,6 @@ public class MapParserTest {
     private final LevelFactory levelCreator = mock(LevelFactory.class);
     private final BoardFactory boardCreator = mock(BoardFactory.class);
     private final List<String> string = null;
-    private ExpectedException thrown = ExpectedException.none();
     /**
      * Sets up the mapParser with the default factories.
      */
