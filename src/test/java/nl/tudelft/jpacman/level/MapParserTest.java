@@ -12,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.jpacman.board.BoardFactory;
-import org.junit.rules.ExpectedException;
 
 import java.util.List;
 
