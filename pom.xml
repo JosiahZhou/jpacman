@@ -73,7 +73,7 @@
     <!--</prerequisites>-->
 
     <properties>
-        <jpacman.framework.version>8.1.0-SNAPSHOT</jpacman.framework.version>
+        <jpacman.framework.version>8.1.0</jpacman.framework.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
