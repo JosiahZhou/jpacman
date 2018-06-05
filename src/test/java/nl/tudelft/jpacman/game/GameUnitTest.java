@@ -20,6 +20,9 @@ public class GameUnitTest {
 
     private final GameFactory gameFactory = new GameFactory(playerFactory);
 
+    /**
+     *Set up the singlePlayerGame.
+     */
     @BeforeEach
     void setUp() {
         when(playerFactory.createPacMan()).thenReturn(player);
@@ -41,10 +44,10 @@ public class GameUnitTest {
      * Branch with true -> true.
      */
     @Test
-    void InProgress() {
+    void inProgress() {
         when(level.isAnyPlayerAlive()).thenReturn(true);
         when(level.remainingPellets()).thenReturn(2);
-        singlePlayerGame.start();//change isInProgress to true
+        singlePlayerGame.start(); //change isInProgress to true
 
         singlePlayerGame.start();
         assertThat(singlePlayerGame.isInProgress()).isTrue();
