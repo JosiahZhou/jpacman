@@ -40,7 +40,7 @@ public class MapParserTest {
     @Test
     void niceWeather() {
 
-        Level level = mapParser.parseMap(Lists.newArrayList("##", "  "));
+        mapParser.parseMap(Lists.newArrayList("##", "  "));
         verify(boardCreator, times(2)).createGround();
         verify(boardCreator, times(2)).createWall();
 
