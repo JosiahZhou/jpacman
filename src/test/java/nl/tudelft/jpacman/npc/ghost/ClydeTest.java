@@ -1,13 +1,14 @@
 package nl.tudelft.jpacman.npc.ghost;
 
 import nl.tudelft.jpacman.board.BoardFactory;
-import nl.tudelft.jpacman.level.*;
-import nl.tudelft.jpacman.npc.ghost.Navigation;
-
+import nl.tudelft.jpacman.level.PlayerFactory;
+import nl.tudelft.jpacman.level.LevelFactory;
+import nl.tudelft.jpacman.level.Level;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.google.common.collect.Lists;
 import nl.tudelft.jpacman.board.Direction;
+import nl.tudelft.jpacman.level.Player;
 import nl.tudelft.jpacman.sprite.PacManSprites;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
