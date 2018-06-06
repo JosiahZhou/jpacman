@@ -12,3 +12,4 @@ target/
 # for intellij IDEA users
 .idea/
 *.iml
+.DS_Store
