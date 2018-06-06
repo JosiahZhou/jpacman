@@ -8,26 +8,20 @@ import org.junit.jupiter.api.BeforeEach;
  * @author: Chenru Lin
  * @discription:
  */
-public class PlayerCollisionsTest extends CollisionMapTest {
+public class DefaultPlayerInteractionMapTest extends CollisionMapTest {
 
     @Override
     void set() {
-        CollisionMap camp = new PlayerCollisions();
+        CollisionMap camp = new DefaultPlayerInteractionMap();
         setCamp(camp);
     }
 
     /**
-     * set camp an instance of PlayerCollisions().
+     * Set camp to be an instance of DefaultPlayerInteractionMap().
      */
     @BeforeEach
-    void setUp() {
+    void setUp1() {
         set();
     }
-
-
-
-
-
-
 
 }
