@@ -12,3 +12,7 @@ target/
 # for intellij IDEA users
 .idea/
 *.iml
+
+# for some local files
+.DS_Store
+*/.DS_Store

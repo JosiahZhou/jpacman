@@ -86,6 +86,7 @@ public class MapParserTest {
             assertThat(e.getMessage()).contains("Input text cannot be null.");
         }
     }
+
     /**
      * Test for mapParser with 0 width.
      */
