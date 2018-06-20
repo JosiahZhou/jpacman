@@ -48,6 +48,8 @@ public class MultiLevelGameTest extends GameTest {
      * in the multilevel game for the first two levels.
      * Player should enter the next level and be in the state of
      * ready to start after level won.
+     *
+     * To make tests easy, we here use the same map for the three levels.
      */
     @Test
     @Override
@@ -253,6 +255,35 @@ public class MultiLevelGameTest extends GameTest {
         assertThat(getGame().isInProgress()).isFalse();
     }
 
+
+    /**
+     * A test for different map files for three levels.
+     * We use different movement to win to decide whether
+     * we create the correct maps.
+     */
+    @Test
+    public void diffMapTest() {
+        launcher.withMapFile("/map1.txt", "/map2.txt", "/map3.txt");
+        launcher.launch();
+        List<Player> players = getGame().getPlayers();
+        Player player = players.get(0);
+        getGame().start();
+        getGame().move(player, Direction.WEST);
+        assertThat(getGame().getLevelNumber()).isEqualTo(1);
+
+        getGame().start();
+        getGame().move(player, Direction.EAST);
+        assertThat(getGame().getLevelNumber()).isEqualTo(2);
+        getGame().start();
+        getGame().move(player, Direction.SOUTH);
+
+        assertThat(getGame().isInProgress()).isFalse();
+        assertThat(player.isAlive()).isTrue();
+        assertThat(getGame().getLevel().remainingPellets()).isEqualTo(0);
+        // Check if we reached the winning state, which means we create
+        // three maps correctly.
+
+    }
 
 
     private MultiLevelGame getGame() {
