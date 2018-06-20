@@ -37,7 +37,7 @@ public class PlayerWinTest {
 
     /**
      * A test for player consume a pellet in the square next
-     * to the player.The playerWinTestMap map is used.
+     * to the player.The smallMap map is used.
      */
     @Test
     public void playerWinTest() {

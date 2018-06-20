@@ -60,6 +60,21 @@ public class SuspensionTest {
         assertThat(getGame().isInProgress()).isFalse();
     }
 
+    /**
+     * Test whether the game is still suspended when the stop
+     * button is pressed again.
+     */
+    @Test
+    public void isStillSuspend() {
+        launcher.launch();
+
+        getGame().start();
+
+        getGame().stop();
+        getGame().stop();
+        assertThat(getGame().isInProgress()).isFalse();
+    }
+
 
 
     private Game getGame() {

@@ -38,11 +38,11 @@ public class MoveFailTest {
 
     /**
      * A test for player consume a pellet in the square next
-     * to the player.The simpleMap is used.
+     * to the player.The smallMap is used.
      */
     @Test
     public void moveFailTest() {
-        launcher.withMapFile("/simpleMap.txt");
+        launcher.withMapFile("/smallMap.txt");
         launcher.launch();
         getGame().start();
         players = getGame().getPlayers();
@@ -55,9 +55,9 @@ public class MoveFailTest {
          * or other things that are not accessible to
          * the player.
          */
-        assertThat(playerSquare.getSquareAt(Direction.EAST).isAccessibleTo(player)).isFalse();
+        assertThat(playerSquare.getSquareAt(Direction.NORTH).isAccessibleTo(player)).isFalse();
 
-        getGame().move(player, Direction.EAST);
+        getGame().move(player, Direction.NORTH);
         // Move the player towards the not accessible square.
 
         Square newPlayerSquare = player.getSquare();

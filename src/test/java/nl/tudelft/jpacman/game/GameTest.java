@@ -25,14 +25,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class GameTest {
     private Launcher launcher;
 
+
+    /**
+     * Used to set the type of launcher.
+     * @param launcher the input launcher
+     */
+    void set(Launcher launcher) {
+        this.launcher = launcher;
+    }
+
     /**
      * Set up single player game.
      */
     @BeforeEach
     void setUp() {
         launcher = new Launcher();
+        set(launcher);
     }
-
 
     /**
      * Close the user interface.
@@ -45,6 +54,7 @@ public class GameTest {
 
     /**
      * Conformance test suite.
+     * Correspond to the filled entries in the transition table.
      * Pairs are of <(state), (events)> patterns.
      */
 
@@ -135,6 +145,7 @@ public class GameTest {
 
     /**
      * Sneak path test suite.
+     * Correspond to the empty entries in the transition table.
      * Pairs are of <(state), (events)> patterns.
      */
 
@@ -363,6 +374,8 @@ public class GameTest {
         Player player = players.get(0);
         getGame().start();
         getGame().move(player, Direction.EAST);
+        // This leads to the winning state as tested in winTest()
+
         Square square = player.getSquare();
         getGame().move(player, Direction.EAST);
         Square newSquare = player.getSquare();
@@ -372,7 +385,7 @@ public class GameTest {
     }
 
     /**
-     * Another test case for <(pausing), (meet ghost)> pair.
+     * Another test case for <(winning), (meet ghost)> pair.
      * This is to test the ghost cannot move in the ready to start state.
      */
     @Test

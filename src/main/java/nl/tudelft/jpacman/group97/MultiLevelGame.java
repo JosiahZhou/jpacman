@@ -30,14 +30,18 @@ public class MultiLevelGame extends Game {
 
     @Override
     public Level getLevel() {
-        return levels.get(levelNumber);
+        return this.levels.get(levelNumber);
     }
 
     @Override
     public void levelWon() {
-        levelNumber++;
+        this.levelNumber++;
+
         if (levelNumber >= MAX_LEVEL) {
             levelNumber = 2;
+        }
+        else {
+            this.levels.get(levelNumber).registerPlayer(player);
         }
         stop();
     }
@@ -70,8 +74,16 @@ public class MultiLevelGame extends Game {
         this.levels.add(level1);
         this.levels.get(0).registerPlayer(player);
         this.levels.add(level2);
-        this.levels.get(1).registerPlayer(player);
+
         this.levels.add(level3);
-        this.levels.get(2).registerPlayer(player);
+
+    }
+
+    /**
+     *
+     * @return the current level number.
+     */
+    public int getLevelNumber() {
+        return levelNumber;
     }
 }

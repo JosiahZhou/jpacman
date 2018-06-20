@@ -37,7 +37,7 @@ public class PlayerLostTest {
 
     /**
      * A test for player consume a pellet in the square next
-     * to the player.The playerLostMap is used.
+     * to the player.The smallMap is used.
      */
     @Test
     public void playerLostTest() {

@@ -50,8 +50,11 @@ public class RestartTest {
         launcher.launch();
         getGame().start();
         getGame().stop();
+        // The game is suspended as tested in Suspension Test.
+
         getGame().start();
         assertThat(getGame().isInProgress()).isTrue();
+        // The game is start again.
     }
     private Game getGame() {
         return launcher.getGame();
