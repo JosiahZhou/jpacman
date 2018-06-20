@@ -52,24 +52,23 @@ public class PlayerConsumeTest {
         Square playerSquare = player.getSquare();
         Square pelletSquare = playerSquare.getSquareAt(Direction.EAST);
         List<Unit> units = pelletSquare.getOccupants();
+
+        assertThat((units.get(0)) instanceof Pellet).isTrue();
+        // Check if the square on the east contains a pellet.
+
         Pellet pellet = (Pellet) units.get(0);
         getGame().move(player, Direction.EAST);
         Square newPlayerSquare = player.getSquare();
 
-        /**
-         * Check if the player moved in the right direction.
-         */
-        assertThat(newPlayerSquare.getSquareAt(Direction.WEST)).isEqualTo(playerSquare);
+        assertThat(playerSquare.getSquareAt(Direction.EAST)).isEqualTo(newPlayerSquare);
+        // Check if the player moved in the right direction.
 
-        /**
-         * Check if the player get the score.
-         */
         assertThat(player.getScore()).isEqualTo(score + pellet.getValue());
+        // Check if the player got the score.
 
-        /**
-         * Check if the pellet left the square.
-         */
+        assertThat(newPlayerSquare.getOccupants().size()).isEqualTo(1);
         assertThat(newPlayerSquare.getOccupants().get(0)).isEqualTo(player);
+        // Check if the pellet left the square.
 
     }
 

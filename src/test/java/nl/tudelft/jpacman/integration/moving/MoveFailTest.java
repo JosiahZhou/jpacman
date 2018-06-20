@@ -51,18 +51,22 @@ public class MoveFailTest {
         Square playerSquare = player.getSquare();
 
         /**
-         * Check if the square next to the player is a wall.
+         * Check if the square next to the player is a wall
+         * or other things that are not accessible to
+         * the player.
          */
         assertThat(playerSquare.getSquareAt(Direction.EAST).isAccessibleTo(player)).isFalse();
 
         getGame().move(player, Direction.EAST);
-        Square newPlayerSquare = player.getSquare();
+        // Move the player towards the not accessible square.
 
-        /**
-         * Check if the player remained in the same square, which means
-         * the movement is not conducted.
-         */
+        Square newPlayerSquare = player.getSquare();
+        assertThat(getGame().isInProgress()).isTrue();
+        // Check if the game is in progress.
         assertThat(newPlayerSquare).isEqualTo(playerSquare);
+        // Check if the movement is not conducted.
+
+
 
 
     }

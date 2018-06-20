@@ -55,19 +55,17 @@ public class PlayerMovesOnEmptySquareTest {
          */
         Square playerSquare = player.getSquare(); //The current square
         assertThat(playerSquare.getSquareAt(Direction.WEST).getOccupants()).isEmpty();
+        // Check if the square on the west if empty.
 
         getGame().move(player, Direction.WEST); //Move to the empty square
         Square newPlayerSquare = player.getSquare();
 
-        /**
-         * Check if the player moved in the right direction.
-         */
-        assertThat(newPlayerSquare.getSquareAt(Direction.EAST)).isEqualTo(playerSquare);
+        assertThat(playerSquare.getSquareAt(Direction.WEST)).isEqualTo(newPlayerSquare);
+        // Check if the player moved in the right direction.
 
-        /**
-         * Check if the player's score remain the same.
-         */
+
         assertThat(player.getScore()).isEqualTo(score);
+        // Check if the score remain the same.
     }
 
     private Game getGame() {

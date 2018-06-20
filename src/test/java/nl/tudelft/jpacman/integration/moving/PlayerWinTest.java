@@ -37,7 +37,7 @@ public class PlayerWinTest {
 
     /**
      * A test for player consume a pellet in the square next
-     * to the player.The default map is used.
+     * to the player.The playerWinTestMap map is used.
      */
     @Test
     public void playerWinTest() {
@@ -47,7 +47,13 @@ public class PlayerWinTest {
         players = getGame().getPlayers();
         Player player = players.get(0);
         getGame().move(player, Direction.EAST);
+        // Press the arrow to the last pellet
+
         assertThat(getGame().isInProgress()).isFalse();
+        assertThat(player.isAlive()).isTrue();
+        assertThat(getGame().getLevel().remainingPellets()).isEqualTo(0);
+        // Game stops, player alive, and no pellets left
+        // implies player win.
 
     }
 

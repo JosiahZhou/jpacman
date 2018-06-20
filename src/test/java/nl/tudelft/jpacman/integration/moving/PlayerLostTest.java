@@ -37,7 +37,7 @@ public class PlayerLostTest {
 
     /**
      * A test for player consume a pellet in the square next
-     * to the player.The default map is used.
+     * to the player.The playerLostMap is used.
      */
     @Test
     public void playerLostTest() {
@@ -47,7 +47,10 @@ public class PlayerLostTest {
         players = getGame().getPlayers();
         Player player = players.get(0);
         getGame().move(player, Direction.EAST);
+
+        assertThat(player.isAlive()).isFalse();
         assertThat(getGame().isInProgress()).isFalse();
+        // Player died and game over means player lost
 
     }
     private Game getGame() {
