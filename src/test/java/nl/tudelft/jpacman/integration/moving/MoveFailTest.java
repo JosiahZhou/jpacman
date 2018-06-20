@@ -38,7 +38,7 @@ public class MoveFailTest {
 
     /**
      * A test for player consume a pellet in the square next
-     * to the player.The simple map is used.
+     * to the player.The simpleMap is used.
      */
     @Test
     public void moveFailTest() {

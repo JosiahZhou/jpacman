@@ -41,16 +41,16 @@ public class PlayerLostTest {
      */
     @Test
     public void playerLostTest() {
-        launcher.withMapFile("/playerLostMap.txt");
+        launcher.withMapFile("/smallMap.txt");
         launcher.launch();
         getGame().start();
         players = getGame().getPlayers();
         Player player = players.get(0);
-        getGame().move(player, Direction.EAST);
+        getGame().move(player, Direction.WEST);
 
         assertThat(player.isAlive()).isFalse();
         assertThat(getGame().isInProgress()).isFalse();
-        // Player died and game over means player lost
+        // Player died and the game ends means player lost
 
     }
     private Game getGame() {

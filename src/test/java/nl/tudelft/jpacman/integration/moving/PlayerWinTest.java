@@ -41,7 +41,7 @@ public class PlayerWinTest {
      */
     @Test
     public void playerWinTest() {
-        launcher.withMapFile("/playerWinTestMap.txt");
+        launcher.withMapFile("/smallMap.txt");
         launcher.launch();
         getGame().start();
         players = getGame().getPlayers();
