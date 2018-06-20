@@ -71,7 +71,7 @@ public class GameTest {
      */
     @Test
     public void pcgLoseTest() {
-        launcher.withMapFile("/SmallMap.txt");
+        launcher.withMapFile("/smallMap.txt");
         launcher.launch();
         getGame().start();
         List<Player> players = getGame().getPlayers();
